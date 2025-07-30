@@ -19,7 +19,7 @@ describe("Modal Component", () => {
 
   it("isOpen propuna göre modal ekrana basılır", () => {
     // useSelector çağrılınca bunu return etsin
-    useSelector.mockReturnValue({ cart: [] });
+    useSelector.mockReturnValue([]);
 
     // bileşeni renderla (isopen:false)
     const { rerender } = render(<Modal isOpen={false} close={closeMock} />);
@@ -36,7 +36,7 @@ describe("Modal Component", () => {
 
   it("X butonuna tıklanınca close fonksiyonu çalışır", async () => {
     // useSelector çağrılınca bunu return etsin
-    useSelector.mockReturnValue({ cart: [] });
+     useSelector.mockReturnValue([]);
 
     // userEvent kurulum
     const user = userEvent.setup();
@@ -56,7 +56,7 @@ describe("Modal Component", () => {
 
   it("Sepetin doluluk durumuna göre ekrana uyarı basılır", () => {
     // useSelector çağrılınca boş return etsin
-    useSelector.mockReturnValue({ cart: [] });
+     useSelector.mockReturnValue([]);
 
     // bileşeni renderla (isopen:false)
     const { rerender } = render(<Modal isOpen={true} close={closeMock} />);
@@ -65,7 +65,7 @@ describe("Modal Component", () => {
     screen.getByText(/henüz/i);
 
     // useSelector çağrılınca dolu return etsin
-    useSelector.mockReturnValue({ cart: [1, 2, 3, 4] });
+    useSelector.mockReturnValue([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
 
     // bileşeni tekrar renderla
     rerender(<Modal isOpen={true} close={closeMock} />);
@@ -76,7 +76,7 @@ describe("Modal Component", () => {
 
   it("Sepet dolu ise her bir eleman için ekrana kart basılır", () => {
     // useSelector çağrılınca dolur return etsin
-    useSelector.mockReturnValue({ cart: [1, 2, 3, 4] });
+    useSelector.mockReturnValue([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
 
     // bileşeni renderla
     render(<Modal isOpen={true} close={closeMock} />);
