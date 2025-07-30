@@ -1,0 +1,32 @@
+import CartItem from './cart-item';
+import CartInfo from './cart-info';
+import { IoClose } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
+
+const Modal = ({isOpen, close}) => {
+    const cart = useSelector((state) => state.cart);
+    
+  return (
+    isOpen && ( 
+    <div data-testid="modal" className='fixed inset-0 bg-black/30 backdrop-blur-sm grid place-items-center z-[999]'>
+        <div className=' bg-white p-5 rounded-lg w-[90%] md:w-[600px] text-black max-h-[90vh] overflow-y-auto'>
+            <div className='border-b flex justify-between max-md:text-lg fs-5'>
+                <h1 className='font-semibold'>Sipariş</h1>
+
+                <button data-testid="close" onClick={close} className='border p-2 rounded-md hover:bg-gray-300/50 transition'>
+                <IoClose />
+                </button>
+            </div>
+            <div className='py-5 border-b'>
+        {cart.length === 0 ? ( <p className='text-center text-gray-600 text-lg font-semibold'>Henüz sepete ürün eklenmedi</p> ) : (
+cart.map((item) => <CartItem item={item} key={item.id} />
+                 ))}
+            </div>
+            <CartInfo cart={cart} close={close} />
+        </div>
+    </div>
+    )
+  );
+};
+
+export default Modal;
